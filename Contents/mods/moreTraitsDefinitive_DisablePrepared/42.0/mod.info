@@ -1,0 +1,8 @@
+name=More Traits - Disable Prepared Traits (Definitive)
+poster=poster.png
+icon=icon.png
+description=Disables Prepared traits from More Traits Definitive.
+id=moreTraitsDefinitive_DisablePrepared
+versionMin=42.20
+require=moreTraitsDefinitive
+author=Fork by GersonRess

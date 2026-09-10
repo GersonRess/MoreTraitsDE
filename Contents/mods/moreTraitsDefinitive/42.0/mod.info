@@ -1,0 +1,8 @@
+name=More Traits Definitive
+id=moreTraitsDefinitive
+description=Definitive version of More Traits for B42.20. Adds balanced, carefully designed traits for deeper character creation. 42.20 STABLE
+poster=poster.png
+icon=icon.png
+author=Fork by GersonRess
+versionMin=42.20
+require=UnifiedCarryWeightFramework

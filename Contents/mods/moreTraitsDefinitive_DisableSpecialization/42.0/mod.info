@@ -1,0 +1,8 @@
+name=More Traits - Disable Specialization Traits (Definitive)
+poster=poster.png
+icon=icon.png
+description=Disables Specialization traits from More Traits Definitive.
+id=moreTraitsDefinitive_DisableSpecialization
+versionMin=42.20
+require=moreTraitsDefinitive
+author=Fork by GersonRess
