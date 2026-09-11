@@ -1,5 +1,5 @@
 version=1
-id=
+id=3799050151
 title=More Traits Definitive Edition
 description=[h1]More Traits Definitive Edition[/h1]
 description=
@@ -165,5 +165,5 @@ description=
 description=[b]Workshop ID:[/b] -
 description=
 description=[b]Mod ID:[/b] moreTraitsDefinitive
-tags=Build 42;Balance;Multiplayer;Traits
+tags=Build 42;Balance;Multiplayer;Silly/Fun;Traits;WIP
 visibility=public

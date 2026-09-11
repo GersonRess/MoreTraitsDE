@@ -151,6 +151,27 @@ local function UpdateStats(player, args, command)
         stats:set(CharacterStat.ENDURANCE, args.endurance)
     end
 
+    local deltaFields = {
+        d_panic = { CharacterStat.PANIC, 0, 100 },
+        d_stress = { CharacterStat.STRESS, 0, 1 },
+        d_fatigue = { CharacterStat.FATIGUE, 0, 1 },
+        d_pain = { CharacterStat.PAIN, 0, 100 },
+        d_boredom = { CharacterStat.BOREDOM, 0, 100 },
+        d_unhappiness = { CharacterStat.UNHAPPINESS, 0, 100 },
+        d_anger = { CharacterStat.ANGER, 0, 1 },
+        d_idleness = { CharacterStat.IDLENESS, 0, 1 },
+        d_poison = { CharacterStat.POISON, 0, 100 },
+        d_zombie_fever = { CharacterStat.ZOMBIE_FEVER, 0, 100 },
+        d_zombie_infection = { CharacterStat.ZOMBIE_INFECTION, 0, 100 },
+        d_endurance = { CharacterStat.ENDURANCE, 0, 1 },
+    }
+    for key, spec in pairs(deltaFields) do
+        if args[key] ~= nil then
+            local current = stats:get(spec[1])
+            stats:set(spec[1], MT.Clamp(current + args[key], spec[2], spec[3]))
+        end
+    end
+
     if args.zombie_infection == 0 and args.clear_wounds then
         local bodyDamage = player:getBodyDamage()
         MT.ClearInfection(bodyDamage)
@@ -228,18 +249,6 @@ local function ProcessUpdateWeight(player, args)
         return
     end
     player:setMaxWeightBase(args.weight)
-end
-
-local FastGimpVector = Vector2.new(0, 0)
-local function ProcessFastGimp(player, args)
-    if not args.xSpeed and not args.ySpeed then
-        return
-    end
-    local ok = pcall(function()
-        FastGimpVector:setX(args.xSpeed)
-        FastGimpVector:setY(args.ySpeed)
-        player:moveUnmodded(FastGimpVector:getX(), FastGimpVector:getY())
-    end)
 end
 
 local function ProcessImmunocompromised(player, args)
@@ -424,10 +433,6 @@ local function onClientCommands(module, command, player, args)
 
     if command == 'MT_updateWeight' then
         ProcessUpdateWeight(player, args)
-    end
-
-    if command == 'FastGimp' then
-        ProcessFastGimp(player, args)
     end
 
     if command == 'Immunocompromised' then

@@ -354,11 +354,10 @@ local function CheckDepress(player, playerdata)
         if unhappiness < 25 then
             playerdata.bToadTraitDepressed = false
         else
-            local newUnhappiness = math.max(0, unhappiness - 0.01)
             if isClient() then
-                MT.SendUpdateStats(player, { unhappiness = newUnhappiness })
+                MT.AccumStat(player, { d_unhappiness = -0.01 })
             else
-                stats:set(CharacterStat.UNHAPPINESS, newUnhappiness)
+                stats:set(CharacterStat.UNHAPPINESS, MT.Clamp(unhappiness - 0.01, 0, 100))
             end
         end
     end
@@ -389,7 +388,7 @@ local function CheckSelfHarm(player)
         end
 
         if isClient() then
-            MT.SendBodyPartMechanics(player, { bodyParts = partIndexes, partDamage = damageAmount })
+            MT.AccumBodyDamage(player, partIndexes, damageAmount)
         end
     end
 end
@@ -406,25 +405,25 @@ local function Blissful(player)
     local args = {}
     local updateStats = false
 
-    if unhappiness >= 0 then
-        args.unhappiness = unhappiness - 0.01
+    if unhappiness > 0.05 then
+        args.d_unhappiness = -math.min(0.01, unhappiness)
         updateStats = true
     end
 
-    if boredom >= 0 then
-        args.boredom = boredom - 0.005
+    if boredom > 0.02 then
+        args.d_boredom = -math.min(0.005, boredom)
         updateStats = true
     end
 
     if updateStats then
         if isClient() then
-            MT.SendUpdateStats(player, args)
+            MT.AccumStat(player, args)
         else
-            if args.unhappiness then
-                stats:set(CharacterStat.UNHAPPINESS, args.unhappiness)
+            if args.d_unhappiness then
+                stats:set(CharacterStat.UNHAPPINESS, MT.Clamp(unhappiness - math.min(0.01, unhappiness), 0, 100))
             end
-            if args.boredom then
-                stats:set(CharacterStat.BOREDOM, args.boredom)
+            if args.d_boredom then
+                stats:set(CharacterStat.BOREDOM, MT.Clamp(boredom - math.min(0.005, boredom), 0, 100))
             end
         end
     end

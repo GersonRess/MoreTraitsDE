@@ -36,37 +36,47 @@ local function Update(player, playerdata)
             )
         end
         playerdata.iHoursSinceDrink = 0
-        args.anger = 0
-        args.stress = 0
-        updateStats = true
+        local anger = stats:get(CharacterStat.ANGER)
+        local stress = stats:get(CharacterStat.STRESS)
+        if anger > 0 then
+            args.d_anger = -anger
+            updateStats = true
+        end
+        if stress > 0 then
+            args.d_stress = -stress
+            updateStats = true
+        end
     end
 
     if drunkness > 0 then
-        if internalTick and internalTick >= 25 then
-            args.fatigue = math.max(0, stats:get(CharacterStat.FATIGUE) - 0.01)
-            updateStats = true
+        if playerdata.internalTick and playerdata.internalTick >= 25 then
+            local fatigue = stats:get(CharacterStat.FATIGUE)
+            if fatigue > 0 then
+                args.d_fatigue = -math.min(0.01, fatigue)
+                updateStats = true
+            end
         end
     end
 
     if not playerdata.bSatedDrink then
         if hoursSinceDrink > hoursThreshold then
             local currentPain = stats:get(CharacterStat.PAIN)
-            args.pain = math.min(100, currentPain + (withdrawalIntensity * 0.1))
+            args.d_pain = math.min(100 - currentPain, withdrawalIntensity * 0.1)
             updateStats = true
         end
 
-        if internalTick == 30 then
+        if playerdata.internalTick == 30 then
             local anger = stats:get(CharacterStat.ANGER)
             local stress = stats:get(CharacterStat.STRESS)
             local angerLimit = 0.05 + (withdrawalIntensity * 0.1) / 3
             local stressLimit = 0.15 + (withdrawalIntensity * 0.1) / 2
 
             if anger < angerLimit then
-                args.anger = anger + 0.01
+                args.d_anger = math.min(0.01, angerLimit - anger)
                 updateStats = true
             end
             if stress < stressLimit then
-                args.stress = stress + 0.01
+                args.d_stress = math.min(0.01, stressLimit - stress)
                 updateStats = true
             end
         end
@@ -74,19 +84,23 @@ local function Update(player, playerdata)
 
     if updateStats then
         if isClient() then
-            MT.SendUpdateStats(player, args)
+            MT.AccumStat(player, args)
         else
-            if args.anger then
-                stats:set(CharacterStat.ANGER, args.anger)
+            local anger = args.d_anger
+            local stress = args.d_stress
+            local fatigue = args.d_fatigue
+            local pain = args.d_pain
+            if anger then
+                stats:set(CharacterStat.ANGER, MT.Clamp(stats:get(CharacterStat.ANGER) + anger, 0, 1))
             end
-            if args.stress then
-                stats:set(CharacterStat.STRESS, args.stress)
+            if stress then
+                stats:set(CharacterStat.STRESS, MT.Clamp(stats:get(CharacterStat.STRESS) + stress, 0, 1))
             end
-            if args.fatigue then
-                stats:set(CharacterStat.FATIGUE, args.fatigue)
+            if fatigue then
+                stats:set(CharacterStat.FATIGUE, MT.Clamp(stats:get(CharacterStat.FATIGUE) + fatigue, 0, 1))
             end
-            if args.pain then
-                stats:set(CharacterStat.PAIN, args.pain)
+            if pain then
+                stats:set(CharacterStat.PAIN, MT.Clamp(stats:get(CharacterStat.PAIN) + pain, 0, 100))
             end
         end
     end

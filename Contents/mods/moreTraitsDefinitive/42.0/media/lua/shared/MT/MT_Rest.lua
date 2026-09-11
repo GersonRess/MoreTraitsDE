@@ -175,7 +175,7 @@ local function QuickRest(player, playerdata)
         local newEndurance = math.min(1.0, endurance + finalGain)
 
         if isClient() then
-            MT.SendUpdateStats(player, { endurance = newEndurance })
+            MT.AccumStat(player, { d_endurance = finalGain })
         end
         stats:set(CharacterStat.ENDURANCE, newEndurance)
 

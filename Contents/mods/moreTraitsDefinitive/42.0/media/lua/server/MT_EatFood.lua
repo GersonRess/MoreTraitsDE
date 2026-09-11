@@ -1,5 +1,3 @@
-print("MT_EatFood | v12 loaded")
-
 function MT_EatFoodApplyPain(action)
     local character = action and action.character
     if not character then return end
@@ -7,19 +5,16 @@ function MT_EatFoodApplyPain(action)
     if not item or item:hasComponent(ComponentType.FluidContainer) then return end
     local badteeth = ToadTraitsRegistries.badteeth
     if not badteeth then
-        print("MT_EatFood | no badteeth reference found")
         return
     end
     if isClient() then return end
     if not character:hasTrait(badteeth) then
-        print("MT_EatFood | player without badteeth trait")
         return
     end
     local bodyDamage = character:getBodyDamage()
     local head = bodyDamage and (bodyDamage:getBodyPart(BodyPartType.Head)
             or bodyDamage:getBodyPart(BodyPartType.ToIndex(BodyPartType.Head)))
     if not head then
-        print("MT_EatFood | head is nil")
         return
     end
     local before = head:getAdditionalPain()
@@ -29,7 +24,6 @@ function MT_EatFoodApplyPain(action)
     end
     local painIncrease = 25
     head:setAdditionalPain(math.min(before + painIncrease, 100))
-    print("MT_EatFood | PAIN +" .. painIncrease .. " head " .. before .. "->" .. head:getAdditionalPain() .. " (" .. character:getUsername() .. ")")
 end
 
 local mtEatOldComplete = ISEatFoodAction.complete
@@ -50,5 +44,4 @@ Events.OnGameBoot.Add(function()
             return r
         end
     end
-    print("MT_EatFood | reinstalled")
 end)

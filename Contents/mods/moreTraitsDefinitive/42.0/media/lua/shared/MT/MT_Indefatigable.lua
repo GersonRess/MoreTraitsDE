@@ -12,12 +12,13 @@ local function Trigger(player, playerdata)
     end
 
     local bodyDamage = player:getBodyDamage()
-    local zombies = getCell():getZombieList()
     local triggerHealth = isClient() and 25 or 15
 
     if not (bodyDamage:getHealth() < triggerHealth or (not isClient() and player:isDeathDragDown())) then
         return
     end
+
+    local zombies = getCell():getZombieList()
 
     if getActivatedMods():contains("MTAddonIndefatigableLol") then
         getSoundManager():PlaySound("indefatigabletheme", false, 0):setVolume(0.5)

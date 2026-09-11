@@ -7,7 +7,6 @@ if not isServer() then
 end
 
 skipxpadd = false
-internalTick = 0
 luckimpact = 1.0
 MTModVersion = 42.20
 
@@ -15,6 +14,7 @@ MT = MT or {}
 
 MT.playerDataDefaults = {
     MTModVersion = MTModVersion,
+    internalTick = 0,
     secondwinddisabled = false,
     secondwindrecoveredfatigue = false,
     secondwindcooldown = 0,
@@ -170,6 +170,74 @@ end
 
 function MT.SendBodyPartMechanics(player, args)
     sendClientCommand(player, "MoreTraitsDefinitive", "BodyPartMechanics", args)
+end
+
+MT._statAcc = {}
+MT._bodyAcc = {}
+
+function MT.Clamp(value, min, max)
+    if value < min then
+        return min
+    elseif value > max then
+        return max
+    end
+    return value
+end
+
+function MT.AccumStat(player, deltas)
+    if not isClient() or not player then
+        return
+    end
+    local key = player:getOnlineID()
+    local acc = MT._statAcc[key]
+    if not acc then
+        acc = {}
+        MT._statAcc[key] = acc
+    end
+    for field, delta in pairs(deltas) do
+        if type(delta) == "number" and delta ~= 0 then
+            acc["d_" .. field] = (acc["d_" .. field] or 0) + delta
+        end
+    end
+end
+
+function MT.AccumBodyDamage(player, partIndexes, damage)
+    if not isClient() or not player then
+        return
+    end
+    local key = player:getOnlineID()
+    local acc = MT._bodyAcc[key]
+    if not acc then
+        acc = { parts = {}, damage = 0 }
+        MT._bodyAcc[key] = acc
+    end
+    for _, index in ipairs(partIndexes) do
+        acc.parts[index] = true
+    end
+    acc.damage = acc.damage + damage
+end
+
+function MT.FlushAccum(player)
+    if not isClient() or not player then
+        return
+    end
+    local key = player:getOnlineID()
+    local acc = MT._statAcc[key]
+    if acc then
+        MT._statAcc[key] = nil
+        MT.SendUpdateStats(player, acc)
+    end
+    local bacc = MT._bodyAcc[key]
+    if bacc then
+        MT._bodyAcc[key] = nil
+        local parts = {}
+        for index in pairs(bacc.parts) do
+            parts[#parts + 1] = index
+        end
+        if #parts > 0 and bacc.damage ~= 0 then
+            MT.SendBodyPartMechanics(player, { bodyParts = parts, partDamage = bacc.damage })
+        end
+    end
 end
 
 function MT.Announce(player, optionKey, text, ...)

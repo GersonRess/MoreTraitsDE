@@ -9,11 +9,18 @@ local function OnPlayerUpdate(player)
         return
     end
 
+    if player:isLocalPlayer() then
+        MT.World.FastGimpMove(player)
+    end
+
+    local internalTick = playerdata.internalTick or 0
+
     if internalTick >= 30 then
         local bodyDamage = player:getBodyDamage()
         local isInfected = bodyDamage:isInfected()
         local justGotInfected = (not playerdata.bWasInfected and isInfected)
 
+        MT.FlushAccum(player)
         MT.Combat.Amputee(player, justGotInfected)
         playerdata.bWasInfected = isInfected
         MT.World.VehicleCheck(player)
@@ -28,7 +35,7 @@ local function OnPlayerUpdate(player)
     MT.Rest.SecondWind(player, playerdata)
     MT.Indefatigable.Trigger(player, playerdata)
     MT.State.CheckDepress(player, playerdata)
-    MT.State.Blissful(player)
+    MT.State.Blissful(player, playerdata)
     MT.State.Hardy(player, playerdata)
     MT.Alcohol.Update(player, playerdata)
     MT.Combat.BatteringRam(player, playerdata)
@@ -43,13 +50,7 @@ local function OnPlayerUpdate(player)
     if internalTick > 30 then
         internalTick = 0
     end
-end
-
-local function OnPlayerMove(player)
-    if not player then
-        return
-    end
-    MT.World.FastGimpMove(player)
+    playerdata.internalTick = internalTick
 end
 
 local function OnWeaponHitCharacter(actor, target, weapon, damage)
@@ -150,7 +151,6 @@ local function EveryHours()
 end
 
 Events.OnPlayerUpdate.Add(OnPlayerUpdate)
-Events.OnPlayerMove.Add(OnPlayerMove)
 Events.OnWeaponHitCharacter.Add(OnWeaponHitCharacter)
 Events.OnWeaponSwing.Add(OnWeaponSwing)
 Events.AddXP.Add(AddXP)

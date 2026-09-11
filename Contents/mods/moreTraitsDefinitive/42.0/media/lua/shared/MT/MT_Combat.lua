@@ -367,7 +367,7 @@ local function ProGun(actor, weapon)
                     weapon:setCurrentAmmoCount(currentCapacity + 1)
                 end
 
-                MT.Announce(player, "ProwessGunsAmmo", getText("UI_progunammo"), "", HaloTextHelper.getColorGreen())
+                MT.Announce(player, "ProwessGunsAmmo", getText("UI_progunammo"), true, HaloTextHelper.getColorGreen())
             end
         end
     end
@@ -408,26 +408,31 @@ local function TerminatorGun(player)
         local updateStats = false
 
         if hasTerminator then
-            args.stress = math.max(0, stress - 0.01)
-            args.panic = math.max(0, panic - 10)
-            updateStats = true
+            if stress > 0 then
+                args.d_stress = -math.min(0.01, stress)
+                updateStats = true
+            end
+            if panic > 0 then
+                args.d_panic = -math.min(10, panic)
+                updateStats = true
+            end
         elseif hasAntigun then
-            args.unhappiness = math.min(100, unhappiness + 0.6)
+            args.d_unhappiness = 0.6
             updateStats = true
         end
 
         if updateStats then
             if isClient() then
-                MT.SendUpdateStats(player, args)
+                MT.AccumStat(player, args)
             else
-                if args.panic then
-                    stats:set(CharacterStat.PANIC, args.panic)
+                if args.d_panic then
+                    stats:set(CharacterStat.PANIC, MT.Clamp(stats:get(CharacterStat.PANIC) - math.min(10, stats:get(CharacterStat.PANIC)), 0, 100))
                 end
-                if args.stress then
-                    stats:set(CharacterStat.STRESS, args.stress)
+                if args.d_stress then
+                    stats:set(CharacterStat.STRESS, MT.Clamp(stats:get(CharacterStat.STRESS) - math.min(0.01, stats:get(CharacterStat.STRESS)), 0, 1))
                 end
-                if args.unhappiness then
-                    stats:set(CharacterStat.UNHAPPINESS, args.unhappiness)
+                if args.d_unhappiness then
+                    stats:set(CharacterStat.UNHAPPINESS, MT.Clamp(stats:get(CharacterStat.UNHAPPINESS) + 0.6, 0, 100))
                 end
             end
         end
