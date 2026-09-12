@@ -299,12 +299,15 @@ local function ProcessEvasive(player, args)
         return
     end
 
-    if bodyPart:IsInfected() and not args.wasInfectedBefore and args.isInfected then
+    if bodyPart:IsInfected() then
         bodyPart:SetInfected(false)
-        bodyDamage:setInfected(false)
-        bodyDamage:setInfectionMortalityDuration(-1)
-        bodyDamage:setInfectionTime(-1)
-        bodyDamage:setInfectionGrowthRate(0)
+        bodyPart:setWoundInfectionLevel(-1)
+        if not args.wasInfectedBefore then
+            bodyDamage:setInfected(false)
+            bodyDamage:setInfectionMortalityDuration(-1)
+            bodyDamage:setInfectionTime(-1)
+            bodyDamage:setInfectionGrowthRate(0)
+        end
     end
 
     if bodyPart:bleeding() then

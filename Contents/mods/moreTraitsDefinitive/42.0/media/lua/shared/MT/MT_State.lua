@@ -137,10 +137,13 @@ local function PlayerHit(player, _, __)
                             }
                             sendClientCommand(player, "MoreTraitsDefinitive", "EvasiveDodge", args)
                         else
-                            if bodyPart:IsInfected() and not wasInfectedBefore and isInfected then
+                            if bodyPart:IsInfected() then
                                 bodyPart:SetInfected(false)
-                                MT.ClearInfection(bodyDamage)
-                                bodyDamage:setInfectionGrowthRate(0)
+                                bodyPart:setWoundInfectionLevel(-1)
+                                if not wasInfectedBefore then
+                                    MT.ClearInfection(bodyDamage)
+                                    bodyDamage:setInfectionGrowthRate(0)
+                                end
                             end
 
                             if bodyPart:bleeding() then
@@ -165,7 +168,7 @@ local function PlayerHit(player, _, __)
                         end
                     else
                         table.insert(list, i)
-                        if bodyPart:IsInfected() and not wasInfectedBefore and isInfected then
+                        if bodyPart:IsInfected() and not wasInfectedBefore then
                             playerdata.EvasivePlayerInfected = true
                         end
                     end

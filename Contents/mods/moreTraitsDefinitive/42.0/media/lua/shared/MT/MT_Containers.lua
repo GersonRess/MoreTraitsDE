@@ -219,10 +219,8 @@ local function Antique(page, player, playerdata)
         return
     end
 
-    local LootRespawn = SandboxVars.LootRespawn
-    local respawnMap = { [2] = 24, [3] = 168, [4] = 720, [5] = 1440 }
-    local HoursForLootRespawn = respawnMap[LootRespawn] or 0
-    local AllowRespawn = LootRespawn ~= 1
+    local HoursForLootRespawn = SandboxVars.HoursForLootRespawn or 0
+    local AllowRespawn = HoursForLootRespawn > 0
 
     local baseChance = 10
     local roll = SandboxVars.MoreTraits.AntiqueChance or 1500
@@ -266,10 +264,15 @@ local function Antique(page, player, playerdata)
                     containerObj:transmitModData()
                     shouldRoll = true
                 elseif AllowRespawn and modData.AllowRespawn and modData.bAntiqueRolled then
-                    if (modData.bHoursWhenChecked + HoursForLootRespawn) <= worldAgeHours then
-                        modData.bHoursWhenChecked = worldAgeHours
-                        containerObj:transmitModData()
-                        shouldRoll = true
+                    local container = containerObj:getContainer()
+                    if container:isHasBeenLooted()
+                        and (modData.bHoursWhenChecked + HoursForLootRespawn) <= worldAgeHours then
+                        local maxItems = SandboxVars.MaxItemsForLootRespawn or 5
+                        if not container:getItems() or container:getItems():size() < maxItems then
+                            modData.bHoursWhenChecked = worldAgeHours
+                            containerObj:transmitModData()
+                            shouldRoll = true
+                        end
                     end
                 end
 

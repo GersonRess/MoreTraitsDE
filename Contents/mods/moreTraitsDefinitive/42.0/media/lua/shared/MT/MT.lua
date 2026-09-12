@@ -321,37 +321,14 @@ function MT.QuickSlowTraitCheck(self, baseTime)
     return math.max(1, baseTime)
 end
 
-function MT.PatchTimedAction(class, baseTimeFn)
+function MT.PatchFireBlock(class, aversionFn, constructor)
     if not _G[class] then return end
     local C = _G[class]
-    C.getDuration = function(self)
-        return MT.QuickSlowTraitCheck(self, baseTimeFn(self))
-    end
-    local o_new = C.new
-    if o_new then
-        C.new = function(self, ...)
-            local o = o_new(self, ...)
-            if o then
-                o.maxTime = o:getDuration()
-            end
-            return o
+    if constructor then
+        local o_new = C.new
+        if o_new then
+            C.new = constructor(o_new, aversionFn)
         end
-    end
-end
-
-function MT.PatchFireBlock(class, aversionFn)
-    local C = _G[class]
-    if not C then return end
-    local o_new = C.new
-    C.new = function(self, ...)
-        local o = o_new(self, ...)
-        local character = select(1, ...)
-        if aversionFn(character) then
-            function o:isValid()
-                return false
-            end
-        end
-        return o
     end
 end
 
