@@ -48,12 +48,7 @@ local function SecondWind(player, playerdata)
             playerdata.iHardyEndurance = 5
             playerdata.secondwindcooldown = 0
             playerdata.secondwinddisabled = true
-            HaloTextHelper.addTextWithArrow(
-                    player,
-                    getText("UI_trait_secondwind"),
-                    true,
-                    HaloTextHelper.getColorGreen()
-            )
+            MT.ShowHeadText(player, "UI_trait_secondwind", true, true)
         end
     end
 end
@@ -172,12 +167,12 @@ local function QuickRest(player, playerdata)
         local fatigue = stats:get(CharacterStat.FATIGUE)
         local multiplier = 1.0 - (fatigue * 0.8)
         local finalGain = enduranceGain * multiplier
-        local newEndurance = math.min(1.0, endurance + finalGain)
 
         if isClient() then
             MT.AccumStat(player, { d_endurance = finalGain })
+        else
+            stats:set(CharacterStat.ENDURANCE, math.min(1.0, endurance + finalGain))
         end
-        stats:set(CharacterStat.ENDURANCE, newEndurance)
 
         playerdata.QuickRestActive = true
         return
@@ -186,7 +181,7 @@ local function QuickRest(player, playerdata)
     if playerdata.QuickRestActive then
         if endurance >= 1 or (not isSittingGround and not isRestingFurniture) then
             if endurance >= 1 and (isSittingGround or isRestingFurniture) then
-                HaloTextHelper.addText(player, getText("UI_quickrestfullendurance"), "", HaloTextHelper.getColorGreen())
+                MT.ShowHeadText(player, "UI_quickrestfullendurance", true, false)
             end
             playerdata.QuickRestActive = false
         end

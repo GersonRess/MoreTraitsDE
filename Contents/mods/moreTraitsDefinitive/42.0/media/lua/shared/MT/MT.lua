@@ -247,6 +247,27 @@ function MT.Announce(player, optionKey, text, ...)
     HaloTextHelper.addTextWithArrow(player, text, ...)
 end
 
+function MT.ShowHeadText(player, key, green, arrow)
+    if not player or not key then return end
+    if isServer() then
+        sendClientCommand(player, "MoreTraitsDefinitive", "HeadText", {
+            key = key,
+            green = green and 1 or 0,
+            arrow = (arrow ~= false) and 1 or 0,
+        })
+        return
+    end
+    if isClient() then
+        return
+    end
+    HaloTextHelper.addTextWithArrow(
+            player,
+            getText(key),
+            arrow ~= false,
+            green and HaloTextHelper.getColorGreen() or HaloTextHelper.getColorRed()
+    )
+end
+
 function MT.KillZombie(target, player, damage)
     local targetData = target:getModData()
     if not targetData or target:isDead() then return end

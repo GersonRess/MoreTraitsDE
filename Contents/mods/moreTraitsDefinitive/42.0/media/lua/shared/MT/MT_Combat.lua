@@ -483,6 +483,16 @@ local function BatteringRam(player, playerdata)
         end
     end
 
+    local ramActive = player:isSprinting() and not isInjured
+    if ramActive ~= (playerdata.bRamGhostOn == true) then
+        playerdata.bRamGhostOn = ramActive
+        MT.Combat.RamGhost(player, ramActive)
+    end
+
+    if not player:isSprinting() and not player:isRunning() then
+        return
+    end
+
     if player:isSprinting() and not isInjured then
         local enemies = player:getSpottedList()
         local nearbyZombies = false
@@ -512,7 +522,7 @@ local function BatteringRam(player, playerdata)
                     local timestamp = getTimestamp()
                     local canBeHit = not enemyData.lastRamTime or (timestamp > enemyData.lastRamTime + 5)
 
-                    if distance <= 1.5 and canBeHit and not enemy:isKnockedDown() then
+                    if distance <= 1 and canBeHit and not enemy:isKnockedDown() then
                         enemy:setKnockedDown(true)
                         enemy:setStaggerBack(true)
                         enemy:setHitReaction("")
@@ -550,6 +560,28 @@ local function BatteringRam(player, playerdata)
             end
         end
     end
+
+    end
+
+local function RamGhost(player, active)
+    if not player then
+        return false
+    end
+
+    local ok = pcall(function() player:setGhostMode(active, true) end)
+    if not ok then
+        ok = pcall(function() player:setInvisible(active, true) end)
+    end
+
+    if isClient() then
+        sendClientCommand(player, "MoreTraitsDefinitive", "RamGhost", { on = active })
+    end
+
+    if isServer() then
+        pcall(function() sendPlayerExtraInfo(player) end)
+    end
+
+    return ok
 end
 
 local function NoodleLegs(player)
@@ -683,7 +715,7 @@ local function OnEquipPrimary(player, item)
     local isAmputee = player:hasTrait(ToadTraitsRegistries.amputee) or getActivatedMods():contains("Amputation")
     if isAmputee and (item:isTwoHandWeapon() or item:isRequiresEquippedBothHands()) then
         player:setPrimaryHandItem(nil)
-        HaloTextHelper.addText(player, getText("UI_trait_amputee_missingarm"), "", HaloTextHelper.getColorRed())
+        MT.ShowHeadText(player, "UI_trait_amputee_missingarm", false, false)
         return
     end
 
@@ -700,7 +732,7 @@ local function OnEquipPrimary(player, item)
         }
         if fireItems[itemType] then
             player:setPrimaryHandItem(nil)
-            HaloTextHelper.addText(player, getText("UI_burnedcannotequip"), "", HaloTextHelper.getColorRed())
+            MT.ShowHeadText(player, "UI_burnedcannotequip", false, false)
             return
         end
     end
@@ -724,7 +756,7 @@ local function OnEquipSecondary(player, item)
     if player:hasTrait(ToadTraitsRegistries.amputee) or getActivatedMods():contains("Amputation") then
         if item and item ~= nil then
             player:setSecondaryHandItem(nil)
-            HaloTextHelper.addText(player, getText("UI_trait_amputee_missingarm"), HaloTextHelper.getColorRed())
+            MT.ShowHeadText(player, "UI_trait_amputee_missingarm", false, false)
         end
     end
 end
@@ -737,6 +769,7 @@ MT.Combat.Martial = Martial
 MT.Combat.ProGun = ProGun
 MT.Combat.TerminatorGun = TerminatorGun
 MT.Combat.BatteringRam = BatteringRam
+MT.Combat.RamGhost = RamGhost
 MT.Combat.NoodleLegs = NoodleLegs
 MT.Combat.UpdateUnwavering = UpdateUnwavering
 MT.Combat.Amputee = Amputee

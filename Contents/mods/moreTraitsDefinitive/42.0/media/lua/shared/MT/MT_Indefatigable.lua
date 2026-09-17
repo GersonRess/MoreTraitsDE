@@ -79,7 +79,7 @@ local function Trigger(player, playerdata)
     playerdata.bindefatigable = true
     playerdata.indefatigablecooldown = 0
 
-    HaloTextHelper.addTextWithArrow(player, getText("UI_trait_indefatigable"), true, HaloTextHelper.getColorGreen())
+    MT.ShowHeadText(player, "UI_trait_indefatigable", true, true)
 
     if SandboxVars.MoreTraits.IndefatigableOneUse then
         playerdata.indefatigabledisabled = true

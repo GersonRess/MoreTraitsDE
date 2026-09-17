@@ -122,12 +122,7 @@ local function PlayerHit(player, _, __)
                             blockedAnim = true
                         end
 
-                        HaloTextHelper.addTextWithArrow(
-                                player,
-                                getText("UI_trait_dodgesay"),
-                                true,
-                                HaloTextHelper.getColorGreen()
-                        )
+                        MT.ShowHeadText(player, "UI_trait_dodgesay", true, true)
 
                         if isClient() then
                             local args = {
@@ -208,12 +203,7 @@ local function PlayerHit(player, _, __)
             local reaction = player:getHitReaction()
             if reaction == "Bite" or reaction == "BiteDefended" then
                 player:setHitReaction("Unwavering" .. reaction)
-                HaloTextHelper.addTextWithArrow(
-                        player,
-                        getText("UI_trait_unwavering"),
-                        true,
-                        HaloTextHelper.getColorGreen()
-                )
+                MT.ShowHeadText(player, "UI_trait_unwavering", true, true)
             end
         end
     end
@@ -259,12 +249,7 @@ local function Butter(player)
     if totalChance >= ZombRand(chanceinx) then
         if player:getSecondaryHandItem() ~= nil or player:getPrimaryHandItem() ~= nil then
             player:dropHandItems()
-            HaloTextHelper.addTextWithArrow(
-                    player,
-                    getText("UI_butterfingers_triggered"),
-                    false,
-                    HaloTextHelper.getColorRed()
-            )
+            MT.ShowHeadText(player, "UI_butterfingers_triggered", false, false)
             player:getEmitter():playSound("UIUnEquipItem")
         end
     end
@@ -674,7 +659,7 @@ local function CheckBloodTraits(player)
                 parts:get(data.part):ReduceHealth(data.amount)
             end
         end
-        HaloTextHelper.addTextWithArrow(player, getText("UI_trait_anemic"), false, HaloTextHelper.getColorRed())
+        MT.ShowHeadText(player, "UI_trait_anemic", false, false)
     end
     if #thickParts > 0 then
         if isClient() then
@@ -686,7 +671,7 @@ local function CheckBloodTraits(player)
                 parts:get(data.part):AddHealth(data.amount)
             end
         end
-        HaloTextHelper.addTextWithArrow(player, getText("UI_trait_thickblood"), true, HaloTextHelper.getColorGreen())
+        MT.ShowHeadText(player, "UI_trait_thickblood", true, true)
     end
 end
 

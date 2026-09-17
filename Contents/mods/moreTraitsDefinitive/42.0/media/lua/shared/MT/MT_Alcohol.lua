@@ -28,12 +28,7 @@ local function Update(player, playerdata)
     if drunkness >= 10 then
         if not playerdata.bSatedDrink then
             playerdata.bSatedDrink = true
-            HaloTextHelper.addTextWithArrow(
-                    player,
-                    getText("UI_trait_alcoholicsatisfied"),
-                    true,
-                    HaloTextHelper.getColorGreen()
-            )
+            MT.ShowHeadText(player, "UI_trait_alcoholicsatisfied", true, true)
         end
         playerdata.iHoursSinceDrink = 0
         local anger = stats:get(CharacterStat.ANGER)
@@ -140,12 +135,7 @@ local function Tick(player, playerdata)
 
             if ZombRand(100) <= (hourThreshold / divider) then
                 playerdata.bSatedDrink = false
-                HaloTextHelper.addTextWithArrow(
-                        player,
-                        getText("UI_trait_alcoholicneed"),
-                        false,
-                        HaloTextHelper.getColorRed()
-                )
+                MT.ShowHeadText(player, "UI_trait_alcoholicneed", false, false)
             end
         end
     else
@@ -167,12 +157,7 @@ local function Poison(player, playerdata)
     end
 
     if isSuffering and playerdata.iWithdrawalCooldown <= 0 then
-        HaloTextHelper.addTextWithArrow(
-                player,
-                getText("UI_trait_alcoholicwithdrawal"),
-                false,
-                HaloTextHelper.getColorRed()
-        )
+        MT.ShowHeadText(player, "UI_trait_alcoholicwithdrawal", false, false)
 
         local poisonLevel = 0
         if SandboxVars.MoreTraits.NonlethalAlcoholic then

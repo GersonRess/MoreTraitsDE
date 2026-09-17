@@ -248,7 +248,11 @@ local function ProcessUpdateWeight(player, args)
     if not args.weight then
         return
     end
-    player:setMaxWeightBase(args.weight)
+    if MT.Weight and MT.Weight.RegisterServerWeight then
+        MT.Weight.RegisterServerWeight(player, args.weight)
+    else
+        player:setMaxWeightBase(args.weight)
+    end
 end
 
 local function ProcessImmunocompromised(player, args)
@@ -464,6 +468,17 @@ local function onClientCommands(module, command, player, args)
 
     if command == 'ProwessGuns' then
         ProcessProwessGuns(player, args)
+    end
+
+    if command == 'RamGhost' then
+        local on = args and args.on
+        if on ~= nil then
+            local ok = pcall(function() player:setGhostMode(on == true, true) end)
+            if not ok then
+                pcall(function() player:setInvisible(on == true, true) end)
+            end
+            pcall(function() sendPlayerExtraInfo(player) end)
+        end
     end
 end
 

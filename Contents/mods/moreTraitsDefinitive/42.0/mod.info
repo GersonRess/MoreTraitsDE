@@ -5,4 +5,4 @@ poster=poster.png
 icon=icon.png
 author=Fork by GersonRess
 versionMin=42.20
-require=UnifiedCarryWeightFramework
+incompatible=\1299328280/ToadTraits
