@@ -464,104 +464,74 @@ local function BatteringRam(player, playerdata)
         return
     end
 
-    local stats = player:getStats()
-    local bodyDamage = player:getBodyDamage()
-    local bodyParts = {
-        BodyPartType.UpperLeg_L,
-        BodyPartType.UpperLeg_R,
-        BodyPartType.LowerLeg_L,
-        BodyPartType.LowerLeg_R,
-        BodyPartType.Foot_L,
-        BodyPartType.Foot_R,
-    }
-    local isInjured = false
-    for _, partType in ipairs(bodyParts) do
-        local part = bodyDamage:getBodyPart(partType)
-        if part and part:getFractureTime() > 0 then
-            isInjured = true
-            break
-        end
-    end
+    local isInjured = MT.HasLegFracture(player)
+    local isSprinting = player:isSprinting()
 
-    local ramActive = player:isSprinting() and not isInjured
+    local ramActive = isSprinting and not isInjured
     if ramActive ~= (playerdata.bRamGhostOn == true) then
         playerdata.bRamGhostOn = ramActive
         MT.Combat.RamGhost(player, ramActive)
     end
 
-    if not player:isSprinting() and not player:isRunning() then
+    if not isSprinting or isInjured then
         return
     end
 
-    if player:isSprinting() and not isInjured then
-        local enemies = player:getSpottedList()
-        local nearbyZombies = false
+    local square = player:getCurrentSquare()
+    if not square or square:has(IsoObjectType.tree) then
+        return
+    end
 
-        if enemies then
-            for i = 0, enemies:size() - 1 do
-                local enemy = enemies:get(i)
-                if enemy and enemy:isZombie() and enemy:DistTo(player) <= 2 then
-                    nearbyZombies = true
-                    break
-                end
-            end
+    local enemies = player:getSpottedList()
+    if not enemies or enemies:size() == 0 then
+        return
+    end
+
+    local nearbyZombies = false
+    for i = 0, enemies:size() - 1 do
+        local enemy = enemies:get(i)
+        if enemy and enemy:isZombie() and enemy:DistTo(player) <= 2 then
+            nearbyZombies = true
+            break
         end
+    end
 
-        local inTree = player:getCurrentSquare():has(IsoObjectType.tree) or false
+    if not nearbyZombies then
+        return
+    end
 
-        if nearbyZombies and not inTree and enemies then
-            local fitness = math.max(1, player:getPerkLevel(Perks.Fitness))
-            local enduranceReduction = (10 / fitness) * 0.01
-            local endurance = stats:get(CharacterStat.ENDURANCE)
+    local stats = player:getStats()
+    local fitness = math.max(1, player:getPerkLevel(Perks.Fitness))
+    local enduranceReduction = (10 / fitness) * 0.01
+    local endurance = stats:get(CharacterStat.ENDURANCE)
+    local timestamp = getTimestamp()
+    local hitAny = false
+    local knocks = {}
 
-            for i = 0, enemies:size() - 1 do
-                local enemy = enemies:get(i)
-                if enemy and enemy:isZombie() then
-                    local distance = enemy:DistTo(player)
-                    local enemyData = enemy:getModData()
-                    local timestamp = getTimestamp()
-                    local canBeHit = not enemyData.lastRamTime or (timestamp > enemyData.lastRamTime + 5)
+    for i = 0, enemies:size() - 1 do
+        local enemy = enemies:get(i)
+        if enemy and enemy:isZombie() then
+            local enemyData = enemy:getModData()
+            local canBeHit = not enemyData.lastRamTime or (timestamp > enemyData.lastRamTime + 5)
 
-                    if distance <= 1 and canBeHit and not enemy:isKnockedDown() then
-                        enemy:setKnockedDown(true)
-                        enemy:setStaggerBack(true)
-                        enemy:setHitReaction("")
-                        enemy:setPlayerAttackPosition("FRONT")
-                        enemy:setHitForce(3.0)
-                        enemy:reportEvent("wasHit")
-                        enemyData.lastRamTime = timestamp
-
-                        endurance = math.max(0, endurance - enduranceReduction)
-                        stats:set(CharacterStat.ENDURANCE, endurance)
-
-                        if player:hasTrait(ToadTraitsRegistries.martial)
-                            and SandboxVars.MoreTraits.BatteringRamMartialCombo
-                        then
-                            local hasWeapon = player:getPrimaryHandItem() ~= nil
-                            if SandboxVars.MoreTraits.MartialWeapons or not hasWeapon then
-                                local damageMult = 1.0
-                                local finalDamage = 0
-                                if endurance < 0.25 then
-                                    damageMult = 0.25
-                                elseif endurance < 0.5 then
-                                    damageMult = 0.5
-                                elseif endurance < 0.75 then
-                                    damageMult = 0.75
-                                end
-                                finalDamage = (ZombRand(10, 61) / 100) * damageMult
-                                enemy:setHealth(enemy:getHealth() - finalDamage)
-                                if enemy:getHealth() <= 0 then
-                                    enemy:Kill(player)
-                                end
-                            end
-                        end
-                    end
-                end
+            if enemy:DistToProper(player) <= 0.9 and canBeHit and not enemy:isKnockedDown() then
+                enemyData.lastRamTime = timestamp
+                knocks[#knocks + 1] = { id = enemy:getOnlineID(), x = enemy:getX(), y = enemy:getY() }
+                MT.RamKnockdown(enemy, 2.0)
+                endurance = math.max(0, endurance - enduranceReduction)
+                hitAny = true
             end
         end
     end
 
+    if not hitAny then
+        return
     end
+
+    stats:set(CharacterStat.ENDURANCE, endurance)
+
+    sendClientCommand(player, "MoreTraitsDefinitive", "RamHit", { knocks = knocks })
+end
 
 local function RamGhost(player, active)
     if not player then
@@ -627,6 +597,7 @@ local function NoodleLegs(player)
         player:setBumpDone(false)
         player:setBumpFall(true)
         player:reportEvent("wasBumped")
+        sendClientCommand(player, "MoreTraitsDefinitive", "TripFall", {})
     end
 end
 

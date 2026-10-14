@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Sai come sopravvivere per strada.<br>Sai che c'è sempre qualcosa da mangiare dove la gente non guarderebbe mai, cioè nella spazzatura.<br>Tendi a trovare più cibo nei contenitori della spazzatura.<br>Probabilità influenzata dalla fortuna.",
     "UI_trait_wildsman": "Uomo selvaggio",
     "UI_trait_wildsmandesc": "Sei stato addestrato a vivere a contatto con la terra.<br>+1 Pesca<br>+1 Costruire Trappole<br>+1 Cercare Cibo<br>+1 Lancia<br>Conosci le ricette di base per le trappole a bastone e sei in grado di creare una canna da pesca di base.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

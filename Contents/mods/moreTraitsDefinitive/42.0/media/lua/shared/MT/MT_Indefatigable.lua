@@ -13,32 +13,22 @@ local function Trigger(player, playerdata)
 
     local bodyDamage = player:getBodyDamage()
     local triggerHealth = isClient() and 25 or 15
+    local deathDragDown = player:isDeathDragDown()
 
-    if not (bodyDamage:getHealth() < triggerHealth or (not isClient() and player:isDeathDragDown())) then
+    if not (bodyDamage:getHealth() < triggerHealth or deathDragDown) then
         return
     end
 
-    local zombies = getCell():getZombieList()
+    sendClientCommand(player, "MoreTraitsDefinitive", "IndefatigableTrigger", {
+        deathDragDown = deathDragDown,
+    })
+
+    if deathDragDown then
+        player:setDeathDragDown(false)
+    end
 
     if getActivatedMods():contains("MTAddonIndefatigableLol") then
         getSoundManager():PlaySound("indefatigabletheme", false, 0):setVolume(0.5)
-    end
-
-    if zombies and zombies:size() >= 3 then
-        for i = 0, zombies:size() - 1 do
-            local zombie = zombies:get(i)
-            if zombie:DistTo(player) <= 3.0 then
-                zombie:setStaggerBack(true)
-                zombie:setKnockedDown(true)
-            end
-        end
-    end
-
-    if not isClient() and player:isDeathDragDown() then
-        playerdata.IndefatigableHasBeenDraggedDown = true
-        player:setPlayingDeathSound(false)
-        player:setDeathDragDown(false)
-        player:setHitReaction("EvasiveBlocked")
     end
 
     local partIndexes = {}

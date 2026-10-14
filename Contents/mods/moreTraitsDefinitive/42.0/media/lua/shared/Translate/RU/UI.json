@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Вы имеете опыт выживания на улицах города.<br>(Шанс найти дополнительную еду в мусорных баках.<br>Шанс зависит от удачи.)",
     "UI_trait_wildsman": "Одичалый",
     "UI_trait_wildsmandesc": "Вы провели много времени в отдалении от цивилизации и научились выживать в лесу.<br>(Умеет мастерить ловушку из палок и простую удочку.)<br>+1 Рыболовство<br>+1 Звероловство<br>+1 Собирательство<br>+1 Копья",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

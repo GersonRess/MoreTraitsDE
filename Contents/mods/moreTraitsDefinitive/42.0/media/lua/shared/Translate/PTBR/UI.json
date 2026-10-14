@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Voce sabe como sobreviver nas ruas.<br>Sabe que sempre ha algo para comer onde as pessoas nunca olhariam, ou seja, no lixo.<br>Voce tende a encontrar mais itens de comida em recipientes de lixo.<br>A chance e afetada por sorte.",
     "UI_trait_wildsman": "Selvagem",
     "UI_trait_wildsmandesc": "Voce e treinado para viver da terra.<br>+1 Pesca<br>+1 Armadilhas<br>+1 Coleta<br>+1 Lancas<br>Voce tem conhecimento de receitas basicas de armadilhas de vara, bem como a capacidade de criar uma vara de pesca basica.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

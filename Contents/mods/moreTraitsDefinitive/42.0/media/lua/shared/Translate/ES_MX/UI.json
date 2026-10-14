@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Sabes cómo sobrevivir en las calles.<br>Sabes que siempre hay algo para comer donde la gente nunca miraría, la basura.<br>Tiendes a encontrar más alimentos en los contenedores de basura.<br>La probabilidad se ve afectada por la suerte.",
     "UI_trait_wildsman": "Salvaje",
     "UI_trait_wildsmandesc": "Estás entrenado para vivir de la tierra.<br>+1 en Pesca<br>+1 en Trampas<br>+1 en Rebuscar<br>+1 en Lanza<br>Conoces las recetas básicas de las trampas de palos, así como la capacidad de fabricar una caña de pescar básica.",
-    "UI_antiquecorpseconvert": "Convertir cadáver"
+    "UI_antiquecorpseconvert": "Convertir cadáver",
+    "UI_corpseconvert_missing": "Faltan materiales:",
+    "UI_corpseconvert_missing_mortar": "Mortero",
+    "UI_corpseconvert_missing_knife": "Cuchillo afilado",
+    "UI_corpseconvert_missing_holder": "Saco vacío o semivacío"
 }

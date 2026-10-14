@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "거리에서 살아남는 법을 알고 있습니다.<br>사람들이 쳐다도 보지 않는, 쓰레기라고 불리는 곳에 먹을 것이 숨겨져 있다는 것을 알고 있습니다.<br>쓰레기통에서 음식을 찾을 확률이 높아집니다.<br>확률은 운에 영향을 받습니다.<br>Scavenging Skill 모드가 활성화되어 있을 때 +1 Scavenging",
     "UI_trait_wildsman": "자연인",
     "UI_trait_wildsmandesc": "자급자족하는 법을 배웠습니다.<br>+1 낚시<br>+1 함정<br>+1 채집<br>+1 창<br>막대 덫 제작법과 낚싯대 제작법을 알고 있습니다.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

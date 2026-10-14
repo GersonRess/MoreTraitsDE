@@ -5,6 +5,35 @@ MT_CorpseRecipes = {
     ["Extract Propane From Corpse"] = true,
 };
 
+local MTCorpseTip = nil
+
+local function getCorpseTip()
+    if MTCorpseTip == nil then
+        MTCorpseTip = ISToolTip:new()
+        MTCorpseTip:initialise()
+        MTCorpseTip:noBackground()
+        MTCorpseTip:setVisible(false)
+        MTCorpseTip.followMouse = true
+    end
+    return MTCorpseTip
+end
+
+local function showCorpseTip(menu, lines)
+    local toolTip = getCorpseTip()
+    toolTip:setName(getText("UI_corpseconvert_missing"))
+    toolTip.description = table.concat(lines, "\n")
+    toolTip.owner = menu
+    toolTip:setVisible(true)
+    toolTip:addToUIManager()
+end
+
+local function hideCorpseTip()
+    if MTCorpseTip == nil then return end
+    MTCorpseTip:setVisible(false)
+    MTCorpseTip:removeFromUIManager()
+    MTCorpseTip.owner = nil
+end
+
 local function onHighlightWorldItem(_option, _menu, _isHighlighted, _object)
     local player = getSpecificPlayer(_menu.player)
     if player == nil then return end
@@ -14,6 +43,13 @@ local function onHighlightWorldItem(_option, _menu, _isHighlighted, _object)
     _object:setOutlineHighlight(_menu.player, _isHighlighted)
     _object:setOutlineHighlightCol(_menu.player, color)
     ISInventoryPage.OnObjectHighlighted(_menu.player, _object, _isHighlighted)
+    if _option.MTMissingLines then
+        if _isHighlighted then
+            showCorpseTip(_menu, _option.MTMissingLines)
+        else
+            hideCorpseTip()
+        end
+    end
 end
 
 local function initHighlight(option, object)
@@ -68,6 +104,15 @@ local function onConvertCorpse(worldobjects, corpseBody, recipe)
     ISTimedActionQueue.add(MTConvertCorpseAction:new(playerObj, corpseBody, recipe))
 end
 
+local function addMissingToolTip(opt, missing)
+    if not opt or #missing == 0 then return end
+    local lines = {}
+    for _, key in ipairs(missing) do
+        table.insert(lines, getText(key))
+    end
+    opt.MTMissingLines = lines
+end
+
 local function addCorpseConvertSubmenu(playerObj, context, worldobjects)
     local known = playerObj:getKnownRecipes()
     if known == nil then return false end
@@ -99,14 +144,27 @@ local function addCorpseConvertSubmenu(playerObj, context, worldobjects)
         end
         initHighlight(corpseOption, corpse)
 
+        local corpseMissing = {}
         for recipe in pairs(MT_CorpseRecipes) do
             if known:contains(recipe) then
+                local mat = MTConvertCorpseAction.checkMaterials(playerObj, corpse, recipe)
                 local opt = corpseMenu:addOption(getText(recipe), worldobjects, onConvertCorpse, corpse, recipe)
                 initHighlight(opt, corpse)
+                if not mat.ok then
+                    opt.notAvailable = true
+                    addMissingToolTip(opt, mat.missing)
+                    for _, key in ipairs(mat.missing) do
+                        table.insert(corpseMissing, key)
+                    end
+                end
                 if corpse:getSquare():haveFire() then
                     opt.notAvailable = true
                 end
             end
+        end
+        if #corpseMissing > 0 then
+            corpseOption.notAvailable = true
+            addMissingToolTip(corpseOption, corpseMissing)
         end
     end
     return true

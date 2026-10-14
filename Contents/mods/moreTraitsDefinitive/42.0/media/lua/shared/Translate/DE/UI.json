@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Du weißt, wie man auf der Straße überlebt.<br>Du weißt, dass es immer etwas zu essen gibt, wo die Leute nie hinschauen würden, nämlich den Müll.<br>Der Zufall ist vom Glück abhängig.",
     "UI_trait_wildsman": "Naturbursche",
     "UI_trait_wildsmandesc": "Du bist darauf trainiert, vom Land zu leben.<br>+1 Fischfang<br>+1 Fallenfang<br>+1 Nahrungssuche<br>+1 Speer<br>Du verfügst über Kenntnisse der Grundrezepte für Stockfallen sowie über die Fähigkeit, eine einfache Angelrute herstellen.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

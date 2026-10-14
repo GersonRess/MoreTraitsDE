@@ -1,32 +1,41 @@
 require "TimedActions/ISBaseTimedAction"
 
-local o_adjustMaxTime = ISBaseTimedAction.adjustMaxTime
+if not MTQuickSlowBridge then
+MTQuickSlowBridge = {}
+local M = MTQuickSlowBridge
+local MARKER = "^MTQS:"
+
+M.originalAdjustMaxTime = ISBaseTimedAction.adjustMaxTime or function(self, maxTime) return maxTime end
+
+function M.encodedName(name, duration)
+    return MARKER .. tostring(duration)
+end
+
+function M.decodedDuration(name)
+    if type(name) ~= "string" then return nil end
+    local value = name:match("^%^MTQS:(.+)$")
+    if not value then return nil end
+    return tonumber(value)
+end
+
+local function clampedDuration(base, decided)
+    if not (base and decided) then return base end
+    if base <= 0 then return decided end
+    local low = base * 0.15
+    local high = base * 4.0
+    if decided < low then return low end
+    if decided > high then return high end
+    return decided
+end
+M.clampedDuration = clampedDuration
 
 function ISBaseTimedAction:adjustMaxTime(maxTime)
-    maxTime = o_adjustMaxTime(self, maxTime)
-    if maxTime > 1 then
-        maxTime = MT.QuickSlowTraitCheck(self, maxTime)
+    if self.mtQuickSlowApplied then return maxTime end
+    if MTClientLogic and MTClientLogic.adjustMaxTime then
+        return MTClientLogic.adjustMaxTime(self, maxTime)
     end
+    local decided = M.decodedDuration(self.name)
+    if decided then return M.clampedDuration(maxTime, decided) end
     return maxTime
 end
-
-local function patchInventoryTransfer()
-    if _G["ISInventoryTransferAction"] then
-        local o_new = ISInventoryTransferAction.new
-        function ISInventoryTransferAction:new(character, item, srcContainer, destContainer, time)
-            local o = o_new(self, character, item, srcContainer, destContainer, time)
-            if o and o.queueList then
-                for _, queued in ipairs(o.queueList) do
-                    if queued.time and queued.time > 1 then
-                        queued.time = MT.QuickSlowTraitCheck(o, queued.time)
-                    end
-                end
-            end
-            return o
-        end
-    end
-end
-
-if isClient() or not isServer() then
-    patchInventoryTransfer()
 end

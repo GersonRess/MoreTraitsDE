@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Ви знаєте, як вижити на вулиці.<br>Ви знаєте, що в смітті завжди є чим поживитися.<br>Ви знаходите більше їжі у сміттєвих баках.<br>Шанс залежить від удачі.<br>+1 до «Пошуку ресурсів», якщо увімкнено відповідний мод.",
     "UI_trait_wildsman": "Дикун",
     "UI_trait_wildsmandesc": "Ви навчені жити коштом природи.<br>Ви знаєте базові рецепти пасток з гілок, а також вмієте майструвати просту вудку.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

@@ -329,3 +329,771 @@ option MoreTraits.GimpWalking
 	type = double, min = -5.0, max = 0, default = -0.75,
 	page = MoreTraits, translation = MoreTraits_GimpWalking,
 }
+
+option MoreTraitsList.preparedammo
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedammo,
+}
+
+option MoreTraitsList.preparedcamp
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedcamp,
+}
+
+option MoreTraitsList.preparedcar
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedcar,
+}
+
+option MoreTraitsList.preparedcoordination
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedcoordination,
+}
+
+option MoreTraitsList.preparedfood
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedfood,
+}
+
+option MoreTraitsList.preparedmedical
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedmedical,
+}
+
+option MoreTraitsList.preparedpack
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedpack,
+}
+
+option MoreTraitsList.preparedrepair
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedrepair,
+}
+
+option MoreTraitsList.preparedweapon
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_preparedweapon,
+}
+
+option MoreTraitsList.generator
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_generator,
+}
+
+option MoreTraitsList.leadfoot
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_leadfoot,
+}
+
+option MoreTraitsList.quiet
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_quiet,
+}
+
+option MoreTraitsList.swift
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_swift,
+}
+
+option MoreTraitsList.blissful
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_blissful,
+}
+
+option MoreTraitsList.flexible
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_flexible,
+}
+
+option MoreTraitsList.noxpaxe
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxpaxe,
+}
+
+option MoreTraitsList.noxpfirstaid
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxpfirstaid,
+}
+
+option MoreTraitsList.noxpmaintenance
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxpmaintenance,
+}
+
+option MoreTraitsList.noxpshooter
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxpshooter,
+}
+
+option MoreTraitsList.noxpsneaky
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxpsneaky,
+}
+
+option MoreTraitsList.noxptechnician
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noxptechnician,
+}
+
+option MoreTraitsList.quickrest
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_quickrest,
+}
+
+option MoreTraitsList.scrapper
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_scrapper,
+}
+
+option MoreTraitsList.tavernbrawler
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_tavernbrawler,
+}
+
+option MoreTraitsList.vagabond
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_vagabond,
+}
+
+option MoreTraitsList.fitted
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_fitted,
+}
+
+option MoreTraitsList.gourmand
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_gourmand,
+}
+
+option MoreTraitsList.grunt
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_grunt,
+}
+
+option MoreTraitsList.idealweight
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_idealweight,
+}
+
+option MoreTraitsList.lucky
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_lucky,
+}
+
+option MoreTraitsList.natural
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_natural,
+}
+
+option MoreTraitsList.thickblood
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_thickblood,
+}
+
+option MoreTraitsList.bladetwirl
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_bladetwirl,
+}
+
+option MoreTraitsList.blunttwirl
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_blunttwirl,
+}
+
+option MoreTraitsList.bouncer
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_bouncer,
+}
+
+option MoreTraitsList.expertdriver
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_expertdriver,
+}
+
+option MoreTraitsList.gymgoer
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_gymgoer,
+}
+
+option MoreTraitsList.martial
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_martial,
+}
+
+option MoreTraitsList.olympian
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_olympian,
+}
+
+option MoreTraitsList.scrounger
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_scrounger,
+}
+
+option MoreTraitsList.tinkerer
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_tinkerer,
+}
+
+option MoreTraitsList.antique
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_antique,
+}
+
+option MoreTraitsList.fast
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_fast,
+}
+
+option MoreTraitsList.gordanite
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_gordanite,
+}
+
+option MoreTraitsList.hardy
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_hardy,
+}
+
+option MoreTraitsList.restfulsleeper
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_restfulsleeper,
+}
+
+option MoreTraitsList.unwavering
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_unwavering,
+}
+
+option MoreTraitsList.batteringram
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_batteringram,
+}
+
+option MoreTraitsList.graverobber
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_graverobber,
+}
+
+option MoreTraitsList.packmule
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_packmule,
+}
+
+option MoreTraitsList.problade
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_problade,
+}
+
+option MoreTraitsList.problunt
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_problunt,
+}
+
+option MoreTraitsList.progun
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_progun,
+}
+
+option MoreTraitsList.prospear
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_prospear,
+}
+
+option MoreTraitsList.actionhero
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_actionhero,
+}
+
+option MoreTraitsList.evasive
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_evasive,
+}
+
+option MoreTraitsList.gunspecialist
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_gunspecialist,
+}
+
+option MoreTraitsList.wildsman
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_wildsman,
+}
+
+option MoreTraitsList.ingenuitive
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_ingenuitive,
+}
+
+option MoreTraitsList.quickworker
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_quickworker,
+}
+
+option MoreTraitsList.indefatigable
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_indefatigable,
+}
+
+option MoreTraitsList.secondwind
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_secondwind,
+}
+
+option MoreTraitsList.superimmune
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_superimmune,
+}
+
+option MoreTraitsList.specaid
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_specaid,
+}
+
+option MoreTraitsList.speccrafting
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_speccrafting,
+}
+
+option MoreTraitsList.specfood
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_specfood,
+}
+
+option MoreTraitsList.specguns
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_specguns,
+}
+
+option MoreTraitsList.specmove
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_specmove,
+}
+
+option MoreTraitsList.specweapons
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_specweapons,
+}
+
+option MoreTraitsList.terminator
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_terminator,
+}
+
+option MoreTraitsList.badteeth
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_badteeth,
+}
+
+option MoreTraitsList.anemic
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_anemic,
+}
+
+option MoreTraitsList.ascetic
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_ascetic,
+}
+
+option MoreTraitsList.depressive
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_depressive,
+}
+
+option MoreTraitsList.injured
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_injured,
+}
+
+option MoreTraitsList.paranoia
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_paranoia,
+}
+
+option MoreTraitsList.selfdestructive
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_selfdestructive,
+}
+
+option MoreTraitsList.unlucky
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_unlucky,
+}
+
+option MoreTraitsList.albino
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_albino,
+}
+
+option MoreTraitsList.poordriver
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_poordriver,
+}
+
+option MoreTraitsList.antigun
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_antigun,
+}
+
+option MoreTraitsList.deprived
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_deprived,
+}
+
+option MoreTraitsList.gimp
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_gimp,
+}
+
+option MoreTraitsList.noodlelegs
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_noodlelegs,
+}
+
+option MoreTraitsList.fearful
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_fearful,
+}
+
+option MoreTraitsList.packmouse
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_packmouse,
+}
+
+option MoreTraitsList.broke
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_broke,
+}
+
+option MoreTraitsList.mundane
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_mundane,
+}
+
+option MoreTraitsList.slowworker
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_slowworker,
+}
+
+option MoreTraitsList.glassbody
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_glassbody,
+}
+
+option MoreTraitsList.immunocompromised
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_immunocompromised,
+}
+
+option MoreTraitsList.incomprehensive
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_incomprehensive,
+}
+
+option MoreTraitsList.butterfingers
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_butterfingers,
+}
+
+option MoreTraitsList.drinker
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_drinker,
+}
+
+option MoreTraitsList.amputee
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_amputee,
+}
+
+option MoreTraitsList.burned
+{
+    type = boolean,
+    default = true,
+    page = MoreTraitsList,
+    translation = MoreTraitsList_burned,
+}

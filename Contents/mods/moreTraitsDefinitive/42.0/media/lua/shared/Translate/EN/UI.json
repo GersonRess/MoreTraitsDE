@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "You know how to survive on the streets.<br>You know that there is always something to eat where people would never look, namely the trash.<br>You tend to find more food items in garbage containers.<br>Chance affected by luck.<br>+1 Scavenging if Scavenging Skill mod enabled",
     "UI_trait_wildsman": "Wildsman",
     "UI_trait_wildsmandesc": "You are trained to live off the land.<br>You have knowledge of basic stick trap recipes as well as the ability to craft a basic fishing rod.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

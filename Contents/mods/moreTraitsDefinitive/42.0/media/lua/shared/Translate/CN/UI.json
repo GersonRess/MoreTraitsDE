@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "你懂得在大街上生存之道。<br>你知道总会有些无人问津的地方可以找到食物，说直白点是垃圾桶。<br>你倾向于从垃圾桶中找到更多食物<br>几率受到幸运的影响。",
     "UI_trait_wildsman": "野人",
     "UI_trait_wildsmandesc": "你受训以在文明之外生存。<br>+1钓鱼<br>+1诱捕<br>+1采集<br>+1长矛<br>你拥有基础套索陷阱的合成配方，且可以自制基础钓竿。",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

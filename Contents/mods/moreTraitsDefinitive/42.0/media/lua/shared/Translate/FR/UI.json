@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Tu sais comment survivre dans la rue.<br>Vous savez qu'il y a toujours quelque chose à manger là où les gens ne regarderaient jamais, c'est -à-dire dans les poubelles.<br>Vous avez tendance à trouver plus de produits alimentaires dans les poubelles.<br>Chance affectée par la compétence chanceux.",
     "UI_trait_wildsman": "Homme sauvage",
     "UI_trait_wildsmandesc": "Vous êtes formé pour vivre de la terre.<br>+1 Pêche<br>+1 Piégeage<br>+1 Recherche<br>+1 Lances<br>Vous connaissez les recettes de base des pièges à bâton ainsi que la capacité de fabriquer une canne à pêche de base.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

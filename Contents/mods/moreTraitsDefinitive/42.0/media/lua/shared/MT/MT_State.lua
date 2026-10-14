@@ -118,7 +118,6 @@ local function PlayerHit(player, _, __)
                     local wasInfectedBefore = playerdata.EvasivePlayerInfected or false
                     if ZombRand(1, 101) <= dodgeChance then
                         if SandboxVars.MoreTraits.EvasiveAnimation then
-                            player:setHitReaction("EvasiveBlocked")
                             blockedAnim = true
                         end
 
@@ -203,6 +202,9 @@ local function PlayerHit(player, _, __)
             local reaction = player:getHitReaction()
             if reaction == "Bite" or reaction == "BiteDefended" then
                 player:setHitReaction("Unwavering" .. reaction)
+                sendClientCommand(player, "MoreTraitsDefinitive", "SetHitReaction", {
+                    reaction = "Unwavering" .. reaction,
+                })
                 MT.ShowHeadText(player, "UI_trait_unwavering", true, true)
             end
         end
@@ -523,7 +525,6 @@ local function BouncerUpdate(player, playerdata)
     end
 
     local chance = SandboxVars.MoreTraits.BouncerEffectiveness or 5
-    local cooldown = SandboxVars.MoreTraits.BouncerCooldown or 60
     local distance = SandboxVars.MoreTraits.BouncerDistance or 1.75
 
     chance = chance + MT.LuckDelta(player, 1)
@@ -542,7 +543,8 @@ local function BouncerUpdate(player, playerdata)
             if closeEnemyCount >= 3 then
                 if not enemy:isKnockedDown() and ZombRand(0, 101) <= chance then
                     enemy:setStaggerBack(true)
-                    playerdata.iBouncercooldown = cooldown
+                    sendClientCommand(player, "MoreTraitsDefinitive", "Bouncer", {})
+                    playerdata.iBouncercooldown = SandboxVars.MoreTraits.BouncerCooldown or 60
                     break
                 end
             end

@@ -296,6 +296,14 @@ local function ProcessInfectPlayer(player)
 end
 
 local function ProcessEvasive(player, args)
+    if not args.partIndex then
+        return
+    end
+
+    if SandboxVars.MoreTraits.EvasiveAnimation then
+        player:setHitReaction("EvasiveBlocked")
+    end
+
     local bodyDamage = player:getBodyDamage()
     local bodyPart = bodyDamage:getBodyPart(BodyPartType.FromIndex(args.partIndex))
 
@@ -468,6 +476,28 @@ local function onClientCommands(module, command, player, args)
 
     if command == 'ProwessGuns' then
         ProcessProwessGuns(player, args)
+    end
+
+    if command == 'RamHit' then
+        MT.ServerEffects.BatteringRam(player, args)
+    end
+
+    if command == 'Bouncer' then
+        MT.ServerEffects.Bouncer(player)
+    end
+
+    if command == 'IndefatigableTrigger' then
+        MT.ServerEffects.Indefatigable(player, args)
+    end
+
+    if command == 'TripFall' then
+        if player:hasTrait(ToadTraitsRegistries.noodlelegs) then
+            MT.ServerEffects.TripFall(player)
+        end
+    end
+
+    if command == 'SetHitReaction' then
+        MT.ServerEffects.SetHitReaction(player, args)
     end
 
     if command == 'RamGhost' then

@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "你知曉該怎麼在街頭生存。<br>你知道去普通人不會去的地方翻找食物，換言之「垃圾桶」。<br>你會在垃圾桶裡面找到更多食物。<br>找到食物的機會和運氣有關",
     "UI_trait_wildsman": "野人",
     "UI_trait_wildsmandesc": "你受過野外生存的訓練。<br>釣魚 +1 <br>陷阱 +1 <br>覓食 +1 <br>長柄武器 +1 <br>你有基本知識能夠製作木棍陷阱和釣竿。",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

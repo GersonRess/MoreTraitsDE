@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Wiesz jak przetrwać na ulicach.<br>Wiesz, że zawsze jest coś do zjedzenia tam, gdzie nikt nie patrzy, czyli w śmieciach.<br>Częściej znajdujesz jedzenie w śmietnikach.<br>Szansa zależy od szczęścia.",
     "UI_trait_wildsman": "Dzikus",
     "UI_trait_wildsmandesc": "Zostałeś nauczony, jak żyć z dala od cywilizacji.<br>+1 Wędkarstwo<br>+1 Stawianie pułapek<br>+1 Zbieractwo<br>+1 Włócznie<br>Wiesz jak zrobić pułapki oraz potrafisz wykonać podstawową wędkę.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

@@ -72,7 +72,7 @@ local function RecoveryProcess(player, playerdata)
     local minutesPerDay = 1440
     local maxRecoveryMinutes = recoveryDays * minutesPerDay
     local timeElapsed = playerdata.SuperImmuneMinutesPassed or 0
-    local speedRun = playerdata.QuickSuperImmune and 6 or 1
+    local speedRun = SandboxVars.MoreTraits.QuickSuperImmune and 6 or 1
 
     local stats = player:getStats()
     local illness = stats:get(CharacterStat.ZOMBIE_FEVER)

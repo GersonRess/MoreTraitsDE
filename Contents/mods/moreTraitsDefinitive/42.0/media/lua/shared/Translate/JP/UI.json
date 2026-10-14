@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "あなたは路上で生き残る方法を知っている。<br>人が見向きもしないところ、つまりゴミ箱には必ず食べ物がある。<br>ゴミ箱からは、より多くの食品を見つけることができる傾向にある。<br>確率は運に左右される。<br>Scavenging Skill MODが有効な場合、+1 Scavenging(ゴミ漁り)",
     "UI_trait_wildsman": "未開人",
     "UI_trait_wildsmandesc": "あなたは、その土地で生活するように訓練されている。<br>+1 釣り<br>+1 罠猟<br>+1 採集<br>+1 槍<br>あなたは、基本的な棒罠の知識と基本的な釣竿を作る能力を持っている。",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

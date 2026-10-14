@@ -235,5 +235,9 @@
     "UI_trait_vagabonddesc": "Sokaklar senin yuvan.<br>Ýnsanlarýn asla bakmayacaðý yerde her zaman yiyecek bir þeyler olduðunu bilirsiniz, yani çöpler.<br>Çöp konteynýrlarýnda daha fazla yiyecek bulma eðilimindesiniz.<br>Bu olasýlýk þanstan etkilenir.",
     "UI_trait_wildsman": "Doðasever",
     "UI_trait_wildsmandesc": "Medeniyetten uzakta yaþamayý seviyorsun.<br>+1 Balýkçýlýk<br>+1 Tuzak kurma<br>+1 Araþtýrma<br>+1 Mýzrak<br>Basit bir olta yapma becerisinin yaný sýra temel tuzaklar hakkýnda bilginiz var.",
-    "UI_antiquecorpseconvert": "Convert Corpse"
+    "UI_antiquecorpseconvert": "Convert Corpse",
+    "UI_corpseconvert_missing": "Missing materials:",
+    "UI_corpseconvert_missing_mortar": "Mortar and pestle",
+    "UI_corpseconvert_missing_knife": "Sharp knife",
+    "UI_corpseconvert_missing_holder": "Empty or half-empty sack"
 }

@@ -199,7 +199,7 @@ local function VehicleCheck(player)
         else
             if player:hasTrait(ToadTraitsRegistries.expertdriver) and vmd.sState ~= "ExpertDriver" then
                 vehicle:setBrakingForce(vmd.fBrakingForce * 2)
-                vehicle:setEngineFeature(vmd.iEngineQuality * 2, vmd.iEngineLoudness * 0.25, vmd.iEnginePower * 6)
+                vehicle:setEngineFeature(vmd.iEngineQuality * 2, vmd.iEngineLoudness * 0.25, vmd.iEnginePower * 2)
                 vehicle:setMaxSpeed(vmd.fMaxSpeed * 1.25)
                 vehicle:getScript():setOffroadEfficiency(vmd.fOffRoadEfficiency * 2)
                 vehicle:setRegulatorSpeed(vmd.fRegulatorSpeed * 2)

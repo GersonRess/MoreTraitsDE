@@ -249,15 +249,12 @@ end
 
 function MT.ShowHeadText(player, key, green, arrow)
     if not player or not key then return end
-    if isServer() then
+    if isServer() or isClient() then
         sendClientCommand(player, "MoreTraitsDefinitive", "HeadText", {
             key = key,
             green = green and 1 or 0,
             arrow = (arrow ~= false) and 1 or 0,
         })
-        return
-    end
-    if isClient() then
         return
     end
     HaloTextHelper.addTextWithArrow(
@@ -266,6 +263,66 @@ function MT.ShowHeadText(player, key, green, arrow)
             arrow ~= false,
             green and HaloTextHelper.getColorGreen() or HaloTextHelper.getColorRed()
     )
+end
+
+function MT.HasLegFracture(player)
+    local bodyDamage = player:getBodyDamage()
+    if not bodyDamage then return false end
+    local parts = {
+        BodyPartType.UpperLeg_L,
+        BodyPartType.UpperLeg_R,
+        BodyPartType.LowerLeg_L,
+        BodyPartType.LowerLeg_R,
+        BodyPartType.Foot_L,
+        BodyPartType.Foot_R,
+    }
+    for _, partType in ipairs(parts) do
+        local part = bodyDamage:getBodyPart(partType)
+        if part and part:getFractureTime() > 0 then
+            return true
+        end
+    end
+    return false
+end
+
+function MT.RamKnockdown(zombie, hitForce)
+    zombie:setKnockedDown(true)
+    zombie:setStaggerBack(true)
+    zombie:setHitReaction("")
+    zombie:setPlayerAttackPosition("FRONT")
+    zombie:setHitForce(hitForce)
+    zombie:reportEvent("wasHit")
+end
+
+function MT.RamKnockMatches(zombie, knock)
+    if not zombie or type(knock) ~= "table" then
+        return false
+    end
+    if knock.id ~= nil and knock.id ~= -1 then
+        return zombie:getOnlineID() == knock.id
+    end
+    if knock.x == nil or knock.y == nil then
+        return false
+    end
+    local dx = zombie:getX() - knock.x
+    local dy = zombie:getY() - knock.y
+    return dx * dx + dy * dy <= 0.25
+end
+
+MT._gates = {}
+
+function MT.LocalGateReady(scope, seconds)
+    local player = getPlayer()
+    if not player then
+        return false
+    end
+    local now = getTimestamp()
+    local last = MT._gates[scope]
+    if last ~= nil and (now - last) < seconds then
+        return false
+    end
+    MT._gates[scope] = now
+    return true
 end
 
 function MT.KillZombie(target, player, damage)
